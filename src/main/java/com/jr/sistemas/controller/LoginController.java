@@ -1,4 +1,4 @@
-package com.jr.sistemas;
+package com.jr.sistemas.controller;
 
 import java.io.IOException;
 
