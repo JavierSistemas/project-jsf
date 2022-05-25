@@ -1,28 +1,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"      
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
       
      <h:head>
-     	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+     <!-- 	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>  -->
+      	<meta name="viewport" content="width=device-width, initial-scale=1" /> 
      </h:head> 
       
 	<h:body>
-
-	<h:form id="loginForm">
-			
-			<h:panelGrid columns="2">
-				
-				<h:outputLabel value="Usuarios: *"  styleClass="colorText"  />
-				<h:inputText   id="txtUsuario" value="#{loginController.usuario}" required="true" requiredMessage="El usuario es obligatorio" />
-				
-				<h:outputLabel value="Contraseña: *"  styleClass="colorText" />
-				<h:inputSecret  id="txtPassword" value="#{loginController.password}" required="true" requiredMessage="El password es obligatorio"/>
-				
-				<h:commandButton  value="Entrar" action="#{loginController.ingresar}"/>
-			
-			</h:panelGrid>
-	</h:form>
 	
+	<div class="ui-fluid">
+	<h:form id="loginForm">
+		
+		<p:growl  id="growl"  showDetail="false" />
+	
+	    <p:panel id="pnlLogin" header="Inicio de Sesión" style="text-align: center" >
+	    
+	    	<p:graphicImage  name="imgs/user.png"  width="15%"/>
+	    	
+			<p:panelGrid  id="pnlGridLogin" columns="1" columnClasses="ui-g-12 ui-md-12,ui-g-12 ui-md-12" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+				
+				<p:outputLabel value="Usuarios: "  styleClass="colorText"  for="txtUsuario" style="float: left" />
+				<p:inputText   id="txtUsuario" value="#{loginController.usuario}" required="true" requiredMessage="El usuario es obligatorio" />
+				
+				<p:outputLabel value="Contraseña: "  styleClass="colorText" for="txtPassword" style="float: left" />
+				<p:password  id="txtPassword" value="#{loginController.password}" required="true" requiredMessage="El password es obligatorio"/>
+				
+				<p:outputLabel/>
+				<p:commandButton  value="Entrar" update="pnlGridLogin, growl" action="#{loginController.ingresar}"/>
+			
+			</p:panelGrid>
+	    </p:panel>
+	</h:form>
+	</div>
+
 	</h:body>
 
 </html>      
