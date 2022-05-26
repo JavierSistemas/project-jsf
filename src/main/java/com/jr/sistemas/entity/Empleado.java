@@ -1,6 +1,9 @@
 package com.jr.sistemas.entity;
 
-public class Empleado {
+import java.io.Serializable;
+
+public class Empleado implements Serializable 
+{
 	
 	/**
 	 * Nombre del empleado

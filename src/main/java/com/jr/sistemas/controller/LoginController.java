@@ -4,8 +4,10 @@ import java.io.IOException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import com.jr.sistemas.dto.UsuarioDTO;
 
 /**
  * 
@@ -25,12 +27,22 @@ public class LoginController
 	private String password;
 	
 	/**
+	 * Bean que mantiene la información en session, se inyecta.
+	 */
+	@ManagedProperty("#{sessionController}")
+	private SessionController sessionController;
+	
+	/**
 	 * Método que permite intrar a la pagina princiapl del proyecto.
 	 */
 	public void ingresar() {
 		
 		if (usuario.equals("javier") && password.equals("123")) {
 			try {
+				UsuarioDTO usuarioDTO= new UsuarioDTO();
+				usuarioDTO.setUsuario(this.usuario);
+				usuarioDTO.setPassword(this.password);
+				this.sessionController.setUsuarioDTO(usuarioDTO);
 				this.redireccionar("principal.xhtml");
 			} catch (IOException e) {
 				FacesContext.getCurrentInstance().addMessage("loginForm:txtUsuario", new FacesMessage(FacesMessage.SEVERITY_FATAL, "La página no existe.", " "));
@@ -71,6 +83,20 @@ public class LoginController
 	 */
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the sessionController
+	 */
+	public SessionController getSessionController() {
+		return sessionController;
+	}
+
+	/**
+	 * @param sessionController the sessionController to set
+	 */
+	public void setSessionController(SessionController sessionController) {
+		this.sessionController = sessionController;
 	}
 	
 }
